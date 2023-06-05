@@ -1,33 +1,35 @@
-import React, { useContext, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { ContactContext } from './ContactContext';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import api from '../api/contacts';
 
-const ContactDetail = () => {
-    const { id } = useParams();
+const DeleteContact = () => {
     const navigate = useNavigate();
-    const { contacts, setSelectedContact, removeContactHandler } = useContext(ContactContext);
+    const { id } = useParams();
+    console.log(id);
 
-    useEffect(() => {
-        const selectedContact = contacts.find((contact) => contact.id === id);
-        setSelectedContact(selectedContact);
-    }, [contacts, id, setSelectedContact]);
+    const deleteContact = async () => {
+        await api.delete(`/contacts/${id}`);
+        navigate('/');
+    };
 
-    const handleDelete = () => {
-        removeContactHandler(id);
+    const cancelDeletion = () => {
         navigate('/');
     };
 
     return (
-        <div className="main">
-            <div className="ui card container">
-                {/* Render contact details */}
+        <div className='ui main'>
+            <h2>Delete Contact</h2>
+            <p>Are you sure you want to delete this contact?</p>
+            <div>
+                <button className="ui button red" onClick={deleteContact}>
+                    Yes
+                </button>
+                <button className="ui button" onClick={cancelDeletion}>
+                    No
+                </button>
             </div>
-            <div className="center-div">
-                <button onClick={handleDelete}>Delete</button>
-            </div>
-            <Link to="/">Back to Contact List</Link>
         </div>
     );
 };
 
-export default ContactDetail;
+export default DeleteContact;

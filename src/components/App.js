@@ -8,8 +8,8 @@ import ContactList from "./ContactList";
 import ContactDetail from "./ContactDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ContactProvider } from './ContactContext';
-import DeleteContact from './DeleteContact';
 import EditContact  from "./EditContact";
+import DeleteContact from './DeleteContact';
 
 
 function App() {
@@ -90,7 +90,7 @@ function App() {
               path="/"
               element={
                 <ContactList 
-                  contacts={searchTerm.length > 0 ?  searchResults : contacts} 
+                  contacts={searchTerm.length <= 0 ?  contacts : searchResults} 
                   getContactId={removeContactHandler} 
                   term={searchTerm}
                   searchKeyword={searchHandler} 
