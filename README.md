@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Before running this project, run server-api.\
+You can download from here [https://github.com/HemanthA0921/server-api]
+
 ## Available Scripts
 
 In the project directory, you can run:
